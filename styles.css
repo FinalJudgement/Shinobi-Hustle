@@ -1,0 +1,48 @@
+main {
+  padding: 100px 20px;
+}
+
+#res-data div {
+  padding: 5px;
+}
+
+.row {
+  display: flex;
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#actions button {
+  position: relative;
+  display: flex;
+  min-width: 120px;
+}
+
+#counter {
+  padding: 3px 10px;
+}
+
+p {
+  margin: 0;
+  padding: 3px 10px;
+}
+.btn {
+  padding: 10px 20px;
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: rgb(209, 214, 220);
+}
+
+.btn:active {
+  background-color: rgb(212, 206, 206);
+}
