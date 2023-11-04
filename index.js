@@ -2,6 +2,7 @@ const exp = document.querySelector("#exp");
 const rank = document.querySelector("#rank");
 const actionPanel = document.querySelector("#actions");
 const counterDiv = document.querySelector("#counter");
+const counterArr = [];
 
 const player = {
   experience: 0,
@@ -15,14 +16,25 @@ const gamePath = {
     reward: 100,
     active: false,
     passive: false,
+    id: 0,
   },
   1000: {
     name: "Taijutsu Lessons",
     cost: 1000,
     reward: 100,
-    multiplier: 0.8,
+    multiplier: 1.1,
     active: false,
     passive: true,
+    id: 1,
+  },
+  10000: {
+    name: "Konoha Academy",
+    cost: 10000,
+    reward: 500,
+    multiplier: 1.2,
+    active: false,
+    passive: true,
+    id: 2,
   },
 };
 
@@ -49,14 +61,20 @@ const compareRewards = (program) => {
 };
 
 const displayCost = (program) => {
-  const newStat = document.createElement("p");
+  let newStat = counterArr[program.id];
+  if (!newStat) {
+    newStat = document.createElement("p");
+    counterArr[program.id] = newStat;
+    counterDiv.appendChild(newStat);
+  }
+
   if (program.passive) {
     newStat.innerText = `+${Math.round(
       program.reward * program.multiplier
     )}s cost: ${program.cost}`;
+  } else {
+    newStat.innerText = `+${Math.round(program.reward)}s cost: ${program.cost}`;
   }
-  counterDiv.innerHTML = `+${program.reward}`;
-  counterDiv.appendChild(newStat);
 };
 
 const generateProgram = (program) => {
@@ -73,14 +91,12 @@ const generateProgram = (program) => {
 };
 
 const unlockProgram = () => {
-  const currentProgram = gamePath[player.experience];
-  if (
-    currentProgram &&
-    !currentProgram.active &&
-    player.experience >= currentProgram.cost
-  ) {
-    generateProgram(currentProgram);
-    currentProgram.active = true;
+  for (const key in gamePath) {
+    const program = gamePath[key];
+    if (!program.active && player.experience >= program.cost) {
+      generateProgram(program);
+      program.active = true;
+    }
   }
 };
 
