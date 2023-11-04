@@ -25,6 +25,12 @@ main {
   margin: 5px 0;
   display: flex;
   min-width: 130px;
+  background-color: rgb(102, 240, 60);
+}
+
+button {
+  padding: 10px;
+  background-color: rgb(240, 177, 60);
 }
 
 #counter {

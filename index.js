@@ -1,9 +1,10 @@
+const soundtrk = document.querySelector("#soundtrack");
 const exp = document.querySelector("#exp");
 const rank = document.querySelector("#rank");
 const actionPanel = document.querySelector("#actions");
 const counterDiv = document.querySelector("#counter");
 const unlockRequirement = document.querySelector("#unlock-requirement");
-
+const song = new Audio("sounds/launchSong.mp3");
 const counterArr = [];
 
 const player = {
@@ -16,49 +17,73 @@ const gamePath = {
   0: {
     name: "Kunai Practice",
     cost: 0,
-    reward: 100,
+    reward: 10,
     active: false,
     passive: false,
     id: 0,
     rank: "Student",
     level: 0,
-    nextRequirement: 1000,
+    nextRequirement: 200,
   },
-  1000: {
+  200: {
     name: "Taijutsu Lessons",
-    cost: 1000,
-    reward: 100,
-    multiplier: 1.1,
+    cost: 200,
+    reward: 10,
+    multiplier: 1.2,
     active: false,
     passive: true,
     id: 1,
     rank: "Student",
     level: 0,
-    nextRequirement: 10000,
+    nextRequirement: 1000,
   },
-  10000: {
+  1000: {
     name: "Konoha Academy",
-    cost: 10000,
-    reward: 1000,
-    multiplier: 1.2,
+    cost: 1000,
+    reward: 50,
+    multiplier: 1.3,
     active: false,
     passive: true,
     id: 2,
     rank: "Student",
     level: 0,
-    nextRequirement: 20000,
+    nextRequirement: 10000,
   },
-  20000: {
+  10000: {
     name: "D Rank Mission",
-    cost: 20000,
-    reward: 2000,
-    multiplier: 1.3,
+    cost: 10000,
+    reward: 500,
+    multiplier: 1.4,
     active: false,
     passive: true,
     id: 3,
     rank: "Genin",
     level: 0,
-    nextRequirement: 50000,
+    nextRequirement: 250000,
+  },
+  250000: {
+    name: "C Rank Mission",
+    cost: 250000,
+    reward: 12500,
+    multiplier: 1.5,
+    active: false,
+    passive: true,
+    id: 4,
+    rank: "Genin",
+    level: 0,
+    nextRequirement: 1000000,
+  },
+  1000000: {
+    name: "Chunnin Exams",
+    cost: 1000000,
+    reward: 50000,
+    multiplier: 1.6,
+    active: false,
+    passive: true,
+    id: 5,
+    rank: "Genin",
+    level: 0,
+    nextRequirement: 2000000,
   },
 };
 
@@ -135,6 +160,12 @@ const unlockProgram = () => {
     }
   }
 };
+const soundtrack = () => {
+  soundtrk.addEventListener("click", () => {
+    song.volume = 0.2;
+    song.play();
+  });
+};
 
 const render = () => {
   exp.innerText = Math.round(player.experience);
@@ -147,4 +178,5 @@ const runGame = () => {
   render();
 };
 
+soundtrack();
 runGame();
